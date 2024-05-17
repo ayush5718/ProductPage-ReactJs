@@ -7,10 +7,13 @@ function Navbar() {
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 600);
   const [navOpen, setNavOpen] = useState(false);
   const [products] = useContext(productContext);
+
+  // in .reduce we pass two parameter first one is accumulator and second value is the current value in accumulator we keep a value
   let distinctCategory = products.reduce(
     (acc, cv) => [...acc, cv.category],
     []
   );
+
   distinctCategory = [...new Set(distinctCategory)]; // this is to filter out the unique element collection
 
   const color = () => {
@@ -54,10 +57,12 @@ function Navbar() {
           </span>
           {navOpen && (
             <nav className="w-screen  sm:relative h-full bg-zinc-100 flex flex-col items-center pt-5  ">
-              <a href="#" className="px-5 py-3 bg-blue-500 mb-3 text-white">
-                {" "}
+              <Link
+                to="/create"
+                className="px-5 py-3 bg-blue-500 mb-3 text-white"
+              >
                 Create
-              </a>
+              </Link>
 
               <h1 className="w-[80%] font-bold">Categories</h1>
               <hr className="w-[80%] border-blue-800" />
@@ -81,10 +86,10 @@ function Navbar() {
         </>
       ) : (
         <nav className="w-[15%] h-full bg-zinc-100 flex flex-col items-center pt-5  ">
-          <a href="#" className="px-5 py-3 bg-blue-500 mb-3 text-white">
+          <Link to="/create" className="px-5 py-3 bg-blue-500 mb-3 text-white">
             {" "}
             Create
-          </a>
+          </Link>
 
           <h1 className="w-[80%] font-bold">Categories</h1>
           <hr className="w-[80%] border-blue-800" />

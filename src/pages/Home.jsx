@@ -7,27 +7,30 @@ import { productContext } from "../utils/Context";
 import Loading from "../components/Loading";
 
 function Home() {
+  const location = useLocation();
   const [products] = useContext(productContext);
+  // const products = JSON.parse(localStorage.getItem("products"));
   const { search } = useLocation();
   const category = decodeURIComponent(search.split("=")[1]);
 
   const [filteredProducts, setFilteredProducts] = useState(null);
 
-  const getProductsByCategory = async () => {
-    try {
-      const { data } = await axios.get(`products/category/${category}`);
-      setFilteredProducts(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const getProductsByCategory = async () => {
+  //   try {
+  //     const { data } = await axios.get(`products/category/${category}`);
+  //     setFilteredProducts(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   useEffect(() => {
     if (!filteredProducts || category == "undefined") {
       setFilteredProducts(products);
     }
     if (category != "undefined") {
-      getProductsByCategory();
+      // getProductsByCategory();
+      setFilteredProducts(products.filter((e) => e.category == category));
     }
   }, [category, products]);
 

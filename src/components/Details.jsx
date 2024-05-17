@@ -12,6 +12,12 @@ function Details() {
   const handleNavigate = () => {
     navigate(-1);
   };
+  const deleteProductHandler = () => {
+    const filteredProduct = products.filter((product) => product.id != id);
+    setProducts(filteredProduct);
+    localStorage.setItem("products", JSON.stringify(filteredProduct));
+    navigate("/");
+  };
   return (
     <>
       <div className="flex sm:flex-row flex-col md:p-[8%] md:w-[80%]  h-full m-auto  justify-center items-center gap-20">
@@ -29,9 +35,12 @@ function Details() {
             <span className="px-5 py-2 bg-blue-600 hover:bg-blue-400 transition-all mr-2 text-white cursor-pointer">
               Edit
             </span>
-            <span className="px-5 py-2 bg-red-600 hover:bg-red-400 transition-all mr-2 text-white cursor-pointer">
+            <button
+              onClick={deleteProductHandler}
+              className="px-5 py-2 bg-red-600 hover:bg-red-400 transition-all mr-2 text-white cursor-pointer"
+            >
               Delete
-            </span>
+            </button>
           </div>
           <button
             onClick={handleNavigate}
